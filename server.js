@@ -9,7 +9,7 @@
 
    const corsOptions = {
       origin: '*',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      methods: 'GET,POST',
       credentials: true,
       optionsSuccessStatus: 204,
     };
