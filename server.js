@@ -9,7 +9,7 @@
 
    const corsOptions = {
       origin: '*',
-      methods: 'GET,POST',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
       optionsSuccessStatus: 204,
     };
@@ -21,7 +21,7 @@
    app.post('/shorten', (req, res) => {
    const { originalUrl } = req.body;
    const shortCode = shortid.generate();
-   const shortUrl = `${process.env.BACKEND_URL}/${shortCode}`;
+   const shortUrl = `https://url-shortner-brasil-back-end.netlify.app/${shortCode}`;
 
    urlDatabase[shortCode] = originalUrl;
 
