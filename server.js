@@ -8,7 +8,7 @@ require('dotenv').config();
 const urlDatabase = {};
 
 const corsOptions = {
-  origin: process.env.BACKEND_URL || 'https://url-shortner-brasil.netlify.app' || 'https://url-shortner-brasil-back-end.app',
+  origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
