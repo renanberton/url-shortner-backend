@@ -8,9 +8,8 @@
    const urlDatabase = {};
 
    const corsOptions = {
-   origin: process.env.BACKEND_URL || 'https://url-shortner-brasil.netlify.app/shorten',
+   origin: process.env.BACKEND_URL || 'https://url-shortner-brasil.netlify.app',
    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-   credentials: true,
    optionsSuccessStatus: 204,
    };
 
