@@ -1,11 +1,13 @@
 const express = require('express');
 const shortid = require('shortid');
+const cors = require('cors'); // Importe o middleware CORS
 const app = express();
 const PORT = 5000;
 
 const urlDatabase = {};
 
 app.use(express.json());
+app.use(cors()); // Use o middleware CORS para todas as rotas
 
 app.post('/shorten', (req, res) => {
   const { originalUrl } = req.body;
