@@ -20,7 +20,7 @@ app.use(express.json());
 app.post('/shorten', (req, res) => {
   const { originalUrl } = req.body;
   const shortCode = shortid.generate();
-  const shortUrl = resolve(process.env.BACKEND_URL, shortCode);
+  const shortUrl = (process.env.BACKEND_URL, shortCode);
 
   urlDatabase[shortCode] = originalUrl;
 
