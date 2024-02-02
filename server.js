@@ -1,18 +1,20 @@
 const express = require('express');
 const shortid = require('shortid');
-const cors = require('cors'); // Importe o middleware CORS
+const cors = require('cors'); 
+const { resolve } = require('url');
 const app = express();
 const PORT = 5000;
+require('dotenv').config();
 
 const urlDatabase = {};
 
 app.use(express.json());
-app.use(cors()); // Use o middleware CORS para todas as rotas
+app.use(cors()); 
 
 app.post('/shorten', (req, res) => {
   const { originalUrl } = req.body;
   const shortCode = shortid.generate();
-  const shortUrl = `http://localhost:${PORT}/${shortCode}`;
+  const shortUrl = resolve(process.env.BACKEND_URL, shortCode);
 
   urlDatabase[shortCode] = originalUrl;
 
@@ -30,6 +32,4 @@ app.get('/:shortCode', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+
