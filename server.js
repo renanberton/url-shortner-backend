@@ -8,7 +8,7 @@
    const urlDatabase = {};
 
    const corsOptions = {
-      origin: '*',
+      origin: 'https://url-shortner-brasil.netlify.app/',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
       optionsSuccessStatus: 204,
