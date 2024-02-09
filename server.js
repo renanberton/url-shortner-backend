@@ -2,12 +2,12 @@ const express = require('express');
 const shortid = require('shortid');
 const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 require('dotenv').config();
 const urlDatabase = {};
 
 const corsOptions = {
-  origin: '/*',
+  origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,

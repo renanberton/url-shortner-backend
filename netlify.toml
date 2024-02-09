@@ -2,3 +2,13 @@
   from = "/*"
   to = "/server.js"
   status = 200
+
+  [[redirects]]
+  from = "/shorten"
+  to = "/.netlify/functions/app/shorten"
+  status = 200
+
+[[redirects]]
+  from = "/:shortCode"
+  to = "/.netlify/functions/app/:shortCode"
+  status = 200
