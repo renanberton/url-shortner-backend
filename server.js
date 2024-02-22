@@ -50,10 +50,27 @@ app.listen(PORT, () => {
 });
 
 
+// Atualize a função serverless para algo assim (no seu arquivo functions/shorten.js, por exemplo):
 exports.handler = async (event, context) => {
-   return {
-     statusCode: 200,
-     body: JSON.stringify({ message: 'Hello World' }),
-   };
- };
- 
+  try {
+    const { originalUrl } = JSON.parse(event.body);
+    const shortCode = shortid.generate();
+    const shortUrl = `${process.env.BACKEND_URL}/${shortCode}`;
+
+    console.log('URL original:', originalUrl);
+    console.log('Código curto gerado:', shortCode);
+
+    urlDatabase[shortCode] = originalUrl;
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ shortUrl }),
+    };
+  } catch (error) {
+    console.error('Erro ao encurtar URL:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Ocorreu um erro ao encurtar a URL. Tente novamente.' }),
+    };
+  }
+};
