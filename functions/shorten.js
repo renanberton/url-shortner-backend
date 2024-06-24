@@ -48,11 +48,18 @@ exports.handler = async (event, context) => {
     const shortCode = event.path.replace('/', '');
 
     if (urlDatabase[shortCode]) {
+      let originalUrl = urlDatabase[shortCode];
+      
+      // Verificar se o URL original tem prefixo http:// ou https://
+      if (!originalUrl.startsWith('http://') && !originalUrl.startsWith('https://')) {
+        originalUrl = `http://${originalUrl}`; // Adicionar http:// por padrão
+      }
+
       // Redirecionar para o URL original
       return {
         statusCode: 302,
         headers: {
-          Location: urlDatabase[shortCode],
+          Location: originalUrl,
         },
       };
     } else {
