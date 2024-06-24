@@ -1,5 +1,5 @@
 const shortid = require('shortid');
-const urlDatabase = {};
+const urlDatabase = {}; // Use an in-memory store for simplicity. Replace with a proper database in production.
 
 exports.handler = async (event, context) => {
   const headers = {
@@ -41,7 +41,7 @@ exports.handler = async (event, context) => {
       };
     }
   } else if (event.httpMethod === 'GET') {
-    const shortCode = event.path.split('/').pop();
+    const shortCode = event.path.replace('/', '');
     const originalUrl = urlDatabase[shortCode];
 
     if (originalUrl) {
