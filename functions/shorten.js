@@ -1,15 +1,18 @@
 const shortid = require('shortid');
-const urlDatabase = {}; // Armazenamento em memória para simplificação. Substitua por um banco de dados adequado em produção.
+
+// Armazenamento em memória para URLs encurtadas
+const urlDatabase = {};
+
+// Configurações CORS
+const headers = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+};
 
 exports.handler = async (event, context) => {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-  };
-
   if (event.httpMethod === 'OPTIONS') {
-    // Lidar com requisições de preflight para CORS
+    // Responder preflight requests para CORS
     return {
       statusCode: 200,
       headers,
@@ -25,6 +28,7 @@ exports.handler = async (event, context) => {
       console.log('URL original:', originalUrl);
       console.log('Código curto gerado:', shortCode);
 
+      // Armazenar no banco de dados em memória
       urlDatabase[shortCode] = originalUrl;
 
       return {
@@ -42,13 +46,13 @@ exports.handler = async (event, context) => {
     }
   } else if (event.httpMethod === 'GET') {
     const shortCode = event.path.replace('/', '');
-    const originalUrl = urlDatabase[shortCode];
 
-    if (originalUrl) {
+    if (urlDatabase[shortCode]) {
+      // Redirecionar para o URL original
       return {
         statusCode: 302,
         headers: {
-          Location: originalUrl,
+          Location: urlDatabase[shortCode],
         },
       };
     } else {
