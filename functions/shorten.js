@@ -1,5 +1,5 @@
 const shortid = require('shortid');
-const urlDatabase = {}; // Use an in-memory store for simplicity. Replace with a proper database in production.
+const urlDatabase = {}; // Armazenamento em memória para simplificação. Substitua por um banco de dados adequado em produção.
 
 exports.handler = async (event, context) => {
   const headers = {
@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
   };
 
   if (event.httpMethod === 'OPTIONS') {
-    // Handle preflight request for CORS
+    // Lidar com requisições de preflight para CORS
     return {
       statusCode: 200,
       headers,
