@@ -48,7 +48,6 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 302,
         headers: {
-          ...headers,
           Location: originalUrl,
         },
       };
